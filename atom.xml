@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://diralpo.github.io/"/>
-  <updated>2020-03-19T07:43:43.703Z</updated>
+  <updated>2020-03-19T11:40:03.437Z</updated>
   <id>http://diralpo.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://diralpo.github.io/2020/03/css%E5%AE%9E%E7%8E%B0%E6%A0%87%E9%A2%98%E8%87%AA%E5%8A%A8%E7%BC%96%E5%8F%B7/"/>
     <id>http://diralpo.github.io/2020/03/css%E5%AE%9E%E7%8E%B0%E6%A0%87%E9%A2%98%E8%87%AA%E5%8A%A8%E7%BC%96%E5%8F%B7/</id>
     <published>2020-03-19T07:38:29.000Z</published>
-    <updated>2020-03-19T07:43:43.703Z</updated>
+    <updated>2020-03-19T11:40:03.437Z</updated>
     
     <summary type="html">
     
@@ -36,6 +36,8 @@
     
     </summary>
     
+    
+      <category term="学习" scheme="http://diralpo.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
       <category term="CSS" scheme="http://diralpo.github.io/tags/CSS/"/>
