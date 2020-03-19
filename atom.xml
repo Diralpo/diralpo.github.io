@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://diralpo.github.io/"/>
-  <updated>2020-03-19T05:04:29.251Z</updated>
+  <updated>2020-03-19T05:13:04.718Z</updated>
   <id>http://diralpo.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://diralpo.github.io/2020/02/19/About/"/>
     <id>http://diralpo.github.io/2020/02/19/About/</id>
     <published>2020-02-19T04:31:18.000Z</published>
-    <updated>2020-03-19T05:04:29.251Z</updated>
+    <updated>2020-03-19T05:13:04.718Z</updated>
     
     <summary type="html">
     
@@ -43,8 +43,6 @@
     
     
       <category term="personal" scheme="http://diralpo.github.io/tags/personal/"/>
-    
-      <category term="about me" scheme="http://diralpo.github.io/tags/about-me/"/>
     
   </entry>
   
