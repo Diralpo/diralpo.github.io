@@ -30,7 +30,7 @@
         
         
           &lt;p&gt;css的counter属性可以实现元素的计数，我们可以考虑利用counter来实现标题的自动编号。&lt;/p&gt;
-&lt;h2 id=&quot;counter相关的属性&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#counter相关的属性&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;counter相关的属性&quot;&gt;&lt;a href=&quot;#counter相关的属性&quot; class=&quot;headerlink&quot;
         
       
     
@@ -49,7 +49,7 @@
     <link href="http://diralpo.github.io/2020/02/About/"/>
     <id>http://diralpo.github.io/2020/02/About/</id>
     <published>2020-02-19T04:31:18.000Z</published>
-    <updated>2020-03-19T11:34:28.025Z</updated>
+    <updated>2020-03-20T05:06:46.869Z</updated>
     
     <summary type="html">
     
@@ -66,8 +66,6 @@
     
     </summary>
     
-    
-      <category term="personal" scheme="http://diralpo.github.io/categories/personal/"/>
     
     
       <category term="personal" scheme="http://diralpo.github.io/tags/personal/"/>
