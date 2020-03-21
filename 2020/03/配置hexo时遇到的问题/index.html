@@ -22,6 +22,9 @@
 
   
 
+  <script type="text/javascript" src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="/js/clipboard-use.js"></script>
 <link rel="alternate" href="/atom.xml" title="Diralpo" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -59,16 +62,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">759字</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3分钟</span>
+            <span class="post-count">1.3k字</span>
         </span>
     </span>
 </div>
@@ -95,8 +89,7 @@
       
 
       
-      <p>最后更新于2020年3月21日。</p>
-<p>之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。</p>
+      <p>之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。</p>
 <h2 id="公式渲染的问题">公式渲染的问题</h2>
 <p>作为一个计算机专业的学生，难免会和各种数学公式打交道，使用截图来呈现公式又感觉有些小low。而现在的Markdown也是支持类似LaTex的公式的。因此，我一开始选择了使用<code>hexo-renderer-kramed</code>作为渲染引擎来渲染，也能较好的符合我的需求。可以通过如下命令来安装<code>hexo-renderer-kramed</code>插件。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
@@ -131,10 +124,29 @@
 </figure>
 <p>源文件如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$$f\left( x \right) &#x3D; \sum\limits_&#123;i &#x3D; 1&#125;^n &#123;X_i^2&#125; $$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$$MD\left(n_&#123;i, j&#125;, n_&#123;x, y&#125;\right)&#x3D;|i-x|+|j-y|$$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$f\left( x \right) &#x3D; \sum\limits_&#123;i &#x3D; 1&#125;^n &#123;X_i^2&#125; $</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$MD\left(n_&#123;i, j&#125;, n_&#123;x, y&#125;\right)&#x3D;|i-x|+|j-y|$</span><br></pre></td></tr></table></figure>
+<h2 id="关于代码复制的问题">关于代码复制的问题</h2>
+<p>作为预备程序员，怎么能忘记<code>ctrl + c、ctrl + v</code>呢。感觉之前展示的代码都不带直接复制的功能，属实是有点弟弟了。于是，我准备在我的博客里加入代码块复制的功能。这里我参考了 这篇<a href="https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD%EF%BC%89/" target="_blank" rel="noopener">博客</a>，来实现代码复制的功能。</p>
+<p>但是，可惜的是那篇博客中使用的是Next主题，而我使用的主题是 Ayer<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，好像就不能直接照抄他的步骤了。可能是这个主题的使用人数不是太多，我没有查找到这种主题配置代码复制功能的教程，我只能自己想想怎么弄了。</p>
+<hr>
+<p>Three Hours Later！</p>
+<p>下面是我的步骤。</p>
+<h3 id="下载-clipboard.js">下载 clipboard.js</h3>
+<p>下载第三方插件：<a href="https://github.com/zenorocha/clipboard.js" target="_blank" rel="noopener">clipboard.js</a>, 或者<a href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.min.js" target="_blank" rel="noopener">直接下载</a> (右键另存为)。</p>
+<p>保存文件到 <code>\themes\ayer\source\js</code> 下。</p>
+<h3 id="clipboard.js-的使用">clipboard.js 的使用</h3>
+<p>也是在 <code>\themes\ayer\source\js</code> 目录下，创建 <code>clipboard-use.js</code>，添加内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//页面载入完成后，创建复制按钮</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">/*页面载入完成后，创建复制按钮*/</span></span><br><span class="line">    !<span class="function"><span class="keyword">function</span> (<span class="params">e, t, a</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/* code */</span></span><br><span class="line">        <span class="keyword">var</span> initCopyCode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> copyHtml = <span class="string">''</span>;</span><br><span class="line">            copyHtml += <span class="string">'&lt;button class="btn-copy" data-clipboard-snippet=""&gt;'</span>;</span><br><span class="line">            copyHtml += <span class="string">'&lt;span&gt;复制&lt;/span&gt;'</span>;</span><br><span class="line">            copyHtml += <span class="string">'&lt;/button&gt;'</span>;</span><br><span class="line">            $(<span class="string">".highlight .code pre"</span>).parent().parent().parent().parent().before(copyHtml);</span><br><span class="line">            <span class="keyword">new</span> ClipboardJS(<span class="string">'.btn-copy'</span>, &#123;</span><br><span class="line">                target: <span class="function"><span class="keyword">function</span>(<span class="params">trigger</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> trigger.nextElementSibling;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        initCopyCode();</span><br><span class="line">    &#125;(<span class="built_in">window</span>, <span class="built_in">document</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里的代码和 <a href="https://yfzhou.coding.me/2018/08/27/Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD%EF%BC%89/" target="_blank" rel="noopener">参考博客</a> 有些不同，按照参考博客中的内容我会报空对象的错误。当然，这也有可能是我自己使用的问题。总之，为了稳妥，我将函数执行的时间手动调整为页面加载完成之后。</p>
+<h3 id="在模板中引入js文件">在模板中引入js文件</h3>
+<p>接下来就要在模板中引入这两个js文件了。</p>
+<p>在<code>\themes\ayer\layout\_partial\head.ejs</code>中引入这两个文件，添加如下代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/jquery-2.0.3.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/clipboard.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/clipboard-use.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/qqpyimg1584794848.jpg"></p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1" role="doc-endnote"><p>Pandoc是由John MacFarlane开发的标记语言转换工具，可实现不同标记语言间的格式转换，堪称该领域中的“瑞士军刀”。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Ayer中文说明: https://shen-yu.gitee.io/2019/ayer/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>
 
