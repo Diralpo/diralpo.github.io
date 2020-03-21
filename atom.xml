@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://diralpo.github.io/"/>
-  <updated>2020-03-19T11:40:03.437Z</updated>
+  <updated>2020-03-21T05:15:08.474Z</updated>
   <id>http://diralpo.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>配置hexo时遇到的问题</title>
+    <link href="http://diralpo.github.io/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://diralpo.github.io/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2020-03-21T04:47:59.000Z</published>
+    <updated>2020-03-21T05:15:08.474Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最后更新于2020年3月21日。&lt;/p&gt;
+&lt;p&gt;之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="hexo" scheme="http://diralpo.github.io/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>css实现标题自动编号</title>
@@ -30,7 +57,8 @@
         
         
           &lt;p&gt;css的counter属性可以实现元素的计数，我们可以考虑利用counter来实现标题的自动编号。&lt;/p&gt;
-&lt;h2 id=&quot;counter相关的属性&quot;&gt;&lt;a href=&quot;#counter相关的属性&quot; class=&quot;headerlink&quot;
+&lt;h2 id=&quot;counter相关的属性&quot;&gt;counter相关的属性&lt;/h2&gt;
+&lt;h3
         
       
     
