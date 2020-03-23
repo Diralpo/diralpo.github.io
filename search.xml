@@ -3,8 +3,7 @@
   <entry>
     <title>配置hexo时遇到的问题</title>
     <url>/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p><a href="https://diralpo.github.io/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">原博客</a></p>
-<p>之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。</p>
+    <content><![CDATA[<p>之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。</p>
 <h2 id="公式渲染的问题">公式渲染的问题</h2>
 <p>作为一个计算机专业的学生，难免会和各种数学公式打交道，使用截图来呈现公式又感觉有些小low。而现在的Markdown也是支持类似LaTex的公式的。因此，我一开始选择了使用<code>hexo-renderer-kramed</code>作为渲染引擎来渲染，也能较好的符合我的需求。可以通过如下命令来安装<code>hexo-renderer-kramed</code>插件。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
