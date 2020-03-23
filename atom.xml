@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Diralpo</title>
+  <title>{{ config.title }}</title>
   
-  <subtitle>天阔云闲，树缈禽幽</subtitle>
-  <link href="/atom.xml" rel="self"/>
+  <subtitle>{{ config.subtitle }}</subtitle>
+  <link href="{{ feed_url | uriencode }}" rel="self"/>
   
-  <link href="http://diralpo.github.io/"/>
-  <updated>2020-03-23T07:40:32.646Z</updated>
-  <id>http://diralpo.github.io/</id>
+  <link href="{{ url | uriencode }}"/>
+  <updated>{{ posts.first().updated.toISOString() }}</updated>
+  <id>{{ url | uriencode }}</id>
   
   <author>
-    <name>Diralpo</name>
+    <name>{{ config.author }}</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>配置hexo时遇到的问题</title>
-    <link href="http://diralpo.github.io/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://diralpo.github.io/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</id>
-    <published>2020-03-21T04:47:59.000Z</published>
-    <updated>2020-03-23T07:40:32.646Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ post.permalink | uriencode }}"/>
+    <id>{{ post.permalink | uriencode }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
@@ -29,27 +29,26 @@
       
         
         
-          &lt;p&gt;之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。&lt;/p&gt;
-&lt;h2
+          {{ short_content.substring(0, delim_pos) }}
         
       
     
     </summary>
     
     
-      <category term="博客部署" scheme="http://diralpo.github.io/categories/%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/"/>
+      <category term="{{ category.name }}" scheme="{{ url + category.path | uriencode }}"/>
     
     
-      <category term="hexo" scheme="http://diralpo.github.io/tags/hexo/"/>
+      <category term="{{ tag.name }}" scheme="{{ url + tag.path | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>css实现标题自动编号</title>
-    <link href="http://diralpo.github.io/2020/03/css%E5%AE%9E%E7%8E%B0%E6%A0%87%E9%A2%98%E8%87%AA%E5%8A%A8%E7%BC%96%E5%8F%B7/"/>
-    <id>http://diralpo.github.io/2020/03/css%E5%AE%9E%E7%8E%B0%E6%A0%87%E9%A2%98%E8%87%AA%E5%8A%A8%E7%BC%96%E5%8F%B7/</id>
-    <published>2020-03-19T07:38:29.000Z</published>
-    <updated>2020-03-23T02:20:20.193Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ post.permalink | uriencode }}"/>
+    <id>{{ post.permalink | uriencode }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
@@ -57,28 +56,26 @@
       
         
         
-          &lt;p&gt;css的counter属性可以实现元素的计数，我们可以考虑利用counter来实现标题的自动编号。&lt;/p&gt;
-&lt;h2 id=&quot;counter相关的属性&quot;&gt;counter相关的属性&lt;/h2&gt;
-&lt;h3
+          {{ short_content.substring(0, delim_pos) }}
         
       
     
     </summary>
     
     
-      <category term="前端学习" scheme="http://diralpo.github.io/categories/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/"/>
+      <category term="{{ category.name }}" scheme="{{ url + category.path | uriencode }}"/>
     
     
-      <category term="CSS" scheme="http://diralpo.github.io/tags/CSS/"/>
+      <category term="{{ tag.name }}" scheme="{{ url + tag.path | uriencode }}"/>
     
   </entry>
   
   <entry>
-    <title>About</title>
-    <link href="http://diralpo.github.io/2020/02/About/"/>
-    <id>http://diralpo.github.io/2020/02/About/</id>
-    <published>2020-02-19T04:31:18.000Z</published>
-    <updated>2020-03-23T02:16:23.701Z</updated>
+    <title>{{ post.title }}</title>
+    <link href="{{ post.permalink | uriencode }}"/>
+    <id>{{ post.permalink | uriencode }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.updated.toISOString() }}</updated>
     
     <summary type="html">
     
@@ -86,10 +83,7 @@
       
         
         
-          &lt;blockquote&gt;
-&lt;p&gt;一只弱鸡，努力变强不变秃&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;GitHub：&lt;a href=&quot;https://github.com/Diralpo&quot; target=&quot;_blank&quot;
+          {{ short_content.substring(0, delim_pos) }}
         
       
     
