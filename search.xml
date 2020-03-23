@@ -70,6 +70,9 @@
 </ol>
 </section>
 ]]></content>
+      <categories>
+        <category>博客部署</category>
+      </categories>
       <tags>
         <tag>hexo</tag>
       </tags>
@@ -193,7 +196,7 @@
 <p>[2] <a href="http://www.w3school.com.cn/cssref/pr_list-style-type.asp" target="_blank" rel="noopener">CSS list-style-type 属性</a></p>
 ]]></content>
       <categories>
-        <category>学习</category>
+        <category>前端学习</category>
       </categories>
       <tags>
         <tag>CSS</tag>
@@ -209,8 +212,5 @@
 <p>email：diralpo@163.com</p>
 <p>页面主题：<a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank" rel="noopener">ayer</a></p>
 ]]></content>
-      <tags>
-        <tag>personal</tag>
-      </tags>
   </entry>
 </search>
