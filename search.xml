@@ -3,7 +3,7 @@
   <entry>
     <title>配置hexo时遇到的问题</title>
     <url>/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>之前，突然想弄一个自己的个人博客。经过一番查找，我最终选定了hexo来配置博客。以下是我目前在配置hexo的过程中遇到的一些问题。</p>
 <h2 id="公式渲染的问题">公式渲染的问题</h2>
 <h3 id="简单的令hexo支持数学公式">简单的令hexo支持数学公式</h3>
 <p>作为一个计算机专业的学生，难免会和各种数学公式打交道，使用截图来呈现公式又感觉有些小low。而现在的Markdown也是支持类似LaTex的公式的。因此，我一开始选择了使用<code>hexo-renderer-kramed</code>作为渲染引擎来渲染，也能较好的符合我的需求。可以通过如下命令来安装<code>hexo-renderer-kramed</code>插件。</p>
@@ -101,7 +101,7 @@
   <entry>
     <title>css实现标题自动编号</title>
     <url>/2020/03/css%E5%AE%9E%E7%8E%B0%E6%A0%87%E9%A2%98%E8%87%AA%E5%8A%A8%E7%BC%96%E5%8F%B7/</url>
-    <content><![CDATA[<p>css的counter属性可以实现元素的计数，我们可以考虑利用counter来实现标题的自动编号。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>css的counter属性可以实现元素的计数，我们可以考虑利用counter来实现标题的自动编号。</p>
 <h2 id="counter相关的属性">counter相关的属性</h2>
 <h3 id="counter-reset属性">counter-reset属性</h3>
 <p>用来设置某个计数器的值。</p>
@@ -226,7 +226,7 @@
   <entry>
     <title>About</title>
     <url>/2020/02/About/</url>
-    <content><![CDATA[<blockquote>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
 <p>一只弱鸡，努力变强不变秃</p>
 </blockquote>
 <p>GitHub：<a href="https://github.com/Diralpo" target="_blank" rel="noopener">Diralpo</a></p>
