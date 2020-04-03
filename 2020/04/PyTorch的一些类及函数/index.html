@@ -64,7 +64,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.2k字</span>
+            <span class="post-count">1.1k字</span>
         </span>
     </span>
 </div>
@@ -92,14 +92,6 @@
 
       
       <p>以下是一些我在使用PyTorch中遇到的一些类及函数，为了便于理解和使用，将官网中的说明摘录一些下来。</p>
-<p>官网中对初始化函数中一些参数的说明：</p>
-<blockquote>
-
-</blockquote>
-<p>机翻</p>
-<blockquote>
-
-</blockquote>
 <h2 id="torch.nn.modules.conv1d">torch.nn.modules.conv1d</h2>
 <p>来源 https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv1d</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Conv1d</span><span class="params">(_ConvNd)</span>:</span></span><br><span class="line">    <span class="string">r"""Applies a 1D convolution over an input signal composed of several input planes. """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels, out_channels, kernel_size, stride=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 padding=<span class="number">0</span>, dilation=<span class="number">1</span>, groups=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 bias=True, padding_mode=<span class="string">'zeros'</span>)</span>:</span></span><br><span class="line">        kernel_size = _single(kernel_size)</span><br><span class="line">        stride = _single(stride)</span><br><span class="line">        padding = _single(padding)</span><br><span class="line">        dilation = _single(dilation)</span><br><span class="line">        super(Conv1d, self).__init__(</span><br><span class="line">            in_channels, out_channels, kernel_size, stride, padding, dilation,</span><br><span class="line">            <span class="literal">False</span>, _single(<span class="number">0</span>), groups, bias, padding_mode)</span><br></pre></td></tr></table></figure>
@@ -169,17 +161,22 @@
 </blockquote></li>
 </ul>
 <p>下面是<a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">官网</a>对于<code>nn.Conv2d</code>输入输出shape的说明。</p>
-<p>Shape:</p>
-<ul>
-<li><p>Input:<span class="math inline">\((N, C_{in}, H_{in}, W_{in})\)</span></p></li>
-<li><p>Output:<span class="math inline">\((N, C_{out}, H_{out}, W_{out})\)</span></p></li>
-</ul>
-<p><span class="math display">\[
+<p><img src="/2020/04/PyTorch%E7%9A%84%E4%B8%80%E4%BA%9B%E7%B1%BB%E5%8F%8A%E5%87%BD%E6%95%B0/image-20200403105140170.png"></p>
+<!-- 上图源markdown代码如下，为使页面更加流畅，使用图片
+Shape:
+
+- Input:$(N, C_{in}, H_{in}, W_{in})$
+
+- Output:$(N, C_{out}, H_{out}, W_{out})$
+
+$$
 H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] - \text{dilation}[0]\times (\text{kernel_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
-\]</span></p>
-<p><span class="math display">\[
+$$
+
+$$
 W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] - \text{dilation}[1]\times (\text{kernel_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
-\]</span></p>
+$$
+-->
 <p>以及<a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">官网</a>中给出的样例</p>
 <blockquote>
 <p>&gt;&gt;&gt; # With square kernels and equal stride</p>
