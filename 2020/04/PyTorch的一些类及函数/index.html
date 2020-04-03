@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    PyTorch-GPU环境配置 |  Diralpo
+    PyTorch的一些类及函数 |  Diralpo
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -36,7 +36,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-pytorch-gpu环境配置" class="article article-type-post" itemscope
+  <article id="post-PyTorch的一些类及函数" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -44,7 +44,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  PyTorch-GPU环境配置
+  PyTorch的一些类及函数
 </h1>
   
 
@@ -53,14 +53,10 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time datetime="2020-03-29T04:54:44.000Z" itemprop="datePublished">2020-03-29</time>
+      <a href="/2020/04/PyTorch%E7%9A%84%E4%B8%80%E4%BA%9B%E7%B1%BB%E5%8F%8A%E5%87%BD%E6%95%B0/" class="article-date">
+  <time datetime="2020-04-02T11:43:00.000Z" itemprop="datePublished">2020-04-02</time>
 </a>
       
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
-  </div>
-
       
       
 <div class="word_count">
@@ -68,7 +64,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.1k字</span>
+            <span class="post-count">1.2k字</span>
         </span>
     </span>
 </div>
@@ -95,96 +91,110 @@
       
 
       
-      <p>这篇博客就是为了记录下我自己配置PyTorch-GPU的过程。</p>
-<p>因为我之前换过一次电脑，导致我这里还要再重新配置一下PyTorch。然而我之前配置的时候又没有做好记录，这次配置又要百度各种教程。😂吸取之前的教训，我现在要记录下我自己的配置过程，省的之后再安装还要百度23333333</p>
-<h2 id="创建conda虚拟环境">创建conda虚拟环境</h2>
-<p>我通过如下命令创建了虚拟环境：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pygpu pip python&#x3D;3.7</span><br></pre></td></tr></table></figure>
-<p>在这里我发现我老是无法创建成功，突然想起去年清华宣布关闭了清华的conda源，我感觉可能就是使用了清华源的原因吧。</p>
-<p>这里我参考 <a href="https://www.jianshu.com/p/14808d1d30d0" target="_blank" rel="noopener">conda源配置</a> 这篇博客，使用如下命令配置中科大源，解决了问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;conda-forge&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;msys2&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;bioconda&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;menpo&#x2F;</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
-<h2 id="配置cuda环境">配置CUDA环境</h2>
-<p>因为我这台电脑之前已经安装过CUDA了，这次就只检查一下是否配置成功了。而关于如何安装CUDA，可以参考 <a href="https://blog.csdn.net/SpadgerZ/article/details/89454247" target="_blank" rel="noopener">Win10系统安装CUDA10.0和cuDNN</a> 这篇博客。</p>
-<h3 id="命令行测试">命令行测试</h3>
-<p>打开cmd命令行窗口，通过如下命令检查cuda是否安装：</p>
-<p>通过如下命令检查cuda是否安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure>
-<p>输出了</p>
+      <p>以下是一些我在使用PyTorch中遇到的一些类及函数，为了便于理解和使用，将官网中的说明摘录一些下来。</p>
+<p>官网中对初始化函数中一些参数的说明：</p>
 <blockquote>
-<p>nvcc: NVIDIA (R) Cuda compiler driver</p>
-<p>Copyright (c) 2005-2019 NVIDIA Corporation</p>
-<p>Built on Fri_Feb__8_19:08:26_Pacific_Standard_Time_2019</p>
-<p>Cuda compilation tools, release 10.1, V10.1.105</p>
+
 </blockquote>
-<p>这表明我已经安装好了cuda10.1的版本。</p>
-<h3 id="编译测试文件">编译测试文件</h3>
-<p>打开<code>C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1</code>路径下的<code>Samples_vs2017.sln</code></p>
-<p>在“解决方案资源管理器”中找到1_Utilities，右键点击“生成”</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122527805.png"></p>
-<p>这时VS2017在编译过程中产生“找不到Windows SDK版本”的错误：</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20190422171732910.png"></p>
-<p>解决方法：在解决方案中右键选择“重定解决方案目标”</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122645545.png"></p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122711378.png"></p>
-<p>点击确定即可通过编译。</p>
-<h3 id="验证devicequery.exe和bandwidthtest.exe">验证deviceQuery.exe和bandwidthTest.exe</h3>
-<p>cmd窗口进入如下路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1\bin\win64\Release</span><br></pre></td></tr></table></figure>
-<p>分别输入<code>deviceQuery</code>，<code>bandwidthTest</code>并运行，<code>Result = PASS</code>则说明通过，反之，<code>Result = Fail</code> 则需要重新安装。</p>
-<figure>
-<img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122958469.png" alt><figcaption>deviceQuery结果</figcaption>
-</figure>
-<figure>
-<img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329123021915.png" alt><figcaption>bandwidthTest结果</figcaption>
-</figure>
-<h3 id="配置cuda环境变量">配置CUDA环境变量</h3>
-<ol type="1">
-<li>确认系统环境变量中：CUDA_PATH和CUDA_PATH_V10.0已经存在</li>
-<li>添加：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CUDA_SDK_PATH &#x3D; C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1</span><br><span class="line">CUDA_LIB_PATH &#x3D; %CUDA_PATH%\lib\x64</span><br><span class="line">CUDA_BIN_PATH &#x3D; %CUDA_PATH%\bin</span><br><span class="line">CUDA_SDK_BIN_PATH &#x3D; %CUDA_SDK_PATH%\bin\win64</span><br><span class="line">CUDA_SDK_LIB_PATH &#x3D; %CUDA_SDK_PATH%\common\lib\x64</span><br></pre></td></tr></table></figure>
-<ol start="3" type="1">
-<li><p>在cmd窗口查看环境变量配置情况，输入<code>set cuda</code>，输出如下：</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329123457521.png"></p></li>
-</ol>
-<h2 id="安装cudnn">安装cuDNN</h2>
-<p>打开 <a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN网页</a></p>
-<p>注意在下载之前需要完成开发者注册（就是注册一个账号）</p>
-<p>选择与CUDA匹配的cuDNN版本进行下载</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122249578.png"></p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122342790.png"></p>
-<p>下载之后是个压缩包文件，解压缩：</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329123638244.png"></p>
-<p>将<code>CUDA\bin</code>、<code>CUDA\include</code>、<code>CUDA\lib</code>中的内容拷贝到相应的<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1</code>文件路径下即可。</p>
-<p>这里我参照 <a href="https://blog.csdn.net/SpadgerZ/article/details/89454247" target="_blank" rel="noopener">Win10系统安装CUDA10.0和cuDNN</a> 这篇博客中加入了系统环境变量如下：</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329124109696.png"></p>
-<h2 id="安装pytorch">安装pytorch</h2>
-<p>在 <a href="https://pytorch.org/get-started/locally/" target="_blank" rel="noopener">Pytorch官网</a> 中找到安装的命令。</p>
-<p><img src="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329111946759.png"></p>
-<p>我这里是直接使用pip安装的。</p>
-<p>使用如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch&#x3D;&#x3D;&#x3D;1.4.0 torchvision&#x3D;&#x3D;&#x3D;0.5.0 -f https:&#x2F;&#x2F;download.pytorch.org&#x2F;whl&#x2F;torch_stable.html</span><br></pre></td></tr></table></figure>
-<h2 id="验证是否安装成功">验证是否安装成功</h2>
-<p>为了确保PyTorch安装成功，我们需要运行简单的样例代码测试，例如打印出随机生成的张量矩阵，以及gpu是否可以使用。</p>
-<p>首先在命令行输入python，进入python的解释器，输入以下语句</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.rand(<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
-<p>输出如下：</p>
+<p>机翻</p>
 <blockquote>
-<p>tensor([[0.9943, 0.2830, 0.5508],</p>
-<p>​ [0.0765, 0.6474, 0.0059],</p>
-<p>​ [0.7241, 0.1868, 0.5398],</p>
-<p>​ [0.3217, 0.4664, 0.4242],</p>
-<p>​ [0.3351, 0.2482, 0.7371]])</p>
+
 </blockquote>
-<p>说明PyTorch安装成功。</p>
-<p>接下来再输入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.cuda.is_available()</span><br></pre></td></tr></table></figure>
-<p>输出为<code>True</code>即证明支持GPU了。</p>
+<h2 id="torch.nn.modules.conv1d">torch.nn.modules.conv1d</h2>
+<p>来源 https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv1d</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Conv1d</span><span class="params">(_ConvNd)</span>:</span></span><br><span class="line">    <span class="string">r"""Applies a 1D convolution over an input signal composed of several input planes. """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels, out_channels, kernel_size, stride=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 padding=<span class="number">0</span>, dilation=<span class="number">1</span>, groups=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 bias=True, padding_mode=<span class="string">'zeros'</span>)</span>:</span></span><br><span class="line">        kernel_size = _single(kernel_size)</span><br><span class="line">        stride = _single(stride)</span><br><span class="line">        padding = _single(padding)</span><br><span class="line">        dilation = _single(dilation)</span><br><span class="line">        super(Conv1d, self).__init__(</span><br><span class="line">            in_channels, out_channels, kernel_size, stride, padding, dilation,</span><br><span class="line">            <span class="literal">False</span>, _single(<span class="number">0</span>), groups, bias, padding_mode)</span><br></pre></td></tr></table></figure>
+<p>类的说明：对由多个输入平面组成的输入信号应用一维卷积</p>
+<p>官网中对初始化函数中一些参数的说明：</p>
+<blockquote>
+<p>in_channels (int): Number of channels in the input image</p>
+<p>out_channels (int): Number of channels produced by the convolution</p>
+<p>kernel_size (int or tuple): Size of the convolving kernel</p>
+<p>stride (int or tuple, optional): Stride of the convolution. Default: 1</p>
+<p>padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0</p>
+<p>dilation (int or tuple, optional): Spacing between kernel elements. Default: 1</p>
+<p>groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1</p>
+<p>bias (bool, optional): If <code>True</code>, adds a learnable bias to the output. Default: <code>True</code></p>
+<p>padding_mode (string, optional). Accepted values <code>zeros</code> and <code>circular</code> Default: <code>zeros</code></p>
+</blockquote>
+<p>机翻</p>
+<blockquote>
+<p>in_channels (int): 输入图像中的通道数</p>
+<p>out_channels (int): 由卷积产生的信道数</p>
+<p>kernel_size (int or tuple): 卷积核的大小</p>
+<p>stride (int or tuple, optional): 卷积的步幅</p>
+<p>padding (int or tuple, optional): 输入的两边都加上了零填充</p>
+<p>dilation (int or tuple, optional): 卷积核元素之间的间距</p>
+<p>groups (int, optional): 从输入通道到输出通道的阻塞连接数</p>
+<p>bias (bool, optional): 如果为“ True” ，则在输出中添加可学习的偏差</p>
+<p>padding_mode (string, optional): 接受值“0”和“循环”</p>
+</blockquote>
+<h2 id="torch.nn.modules.conv2d">torch.nn.modules.conv2d</h2>
+<p>来源 https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Conv2d</span><span class="params">(_ConvNd)</span>:</span></span><br><span class="line">    <span class="string">"""Applies a 2D convolution over an input signal composed of several input planes."""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels, out_channels, kernel_size, stride=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 padding=<span class="number">0</span>, dilation=<span class="number">1</span>, groups=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 bias=True, padding_mode=<span class="string">'zeros'</span>)</span>:</span></span><br><span class="line">        kernel_size = _pair(kernel_size)</span><br><span class="line">        stride = _pair(stride)</span><br><span class="line">        padding = _pair(padding)</span><br><span class="line">        dilation = _pair(dilation)</span><br><span class="line">        super(Conv2d, self).__init__(</span><br><span class="line">            in_channels, out_channels, kernel_size, stride, padding, dilation,</span><br><span class="line">            <span class="literal">False</span>, _pair(<span class="number">0</span>), groups, bias, padding_mode)</span><br></pre></td></tr></table></figure>
+<p>类的说明：在由多个输入平面组成的输入信号上应用二维卷积。</p>
+<p>官网中对初始化函数中一些参数的说明：</p>
+<blockquote>
+<p>in_channels (int): Number of channels in the input image</p>
+<p>out_channels (int): Number of channels produced by the convolution</p>
+<p>kernel_size (int or tuple): Size of the convolving kernel</p>
+<p>stride (int or tuple, optional): Stride of the convolution. Default: 1</p>
+<p>padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0</p>
+<p>dilation (int or tuple, optional): Spacing between kernel elements. Default: 1</p>
+<p>groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1</p>
+<p>bias (bool, optional): If <code>True</code>, adds a learnable bias to the output. Default: <code>True</code></p>
+<p>padding_mode (string, optional). Accepted values <code>zeros</code> and <code>circular</code> Default: <code>zeros</code></p>
+</blockquote>
+<p>机翻</p>
+<blockquote>
+<p>in_channels (int): 输入图像中的通道数</p>
+<p>out_channels (int): 由卷积产生的信道数</p>
+<p>kernel_size (int or tuple): 卷积核的大小</p>
+<p>stride (int or tuple, optional): 卷积的步幅</p>
+<p>padding (int or tuple, optional): 输入的两边都加上了零填充</p>
+<p>dilation (int or tuple, optional): 卷积核元素之间的间距</p>
+<p>groups (int, optional): 从输入通道到输出通道的阻塞连接数</p>
+<p>bias (bool, optional): 如果为“ True” ，则在输出中添加可学习的偏差</p>
+<p>padding_mode (string, optional): 接受值“0”和“循环”</p>
+</blockquote>
+<p>以下是<a href="https://blog.csdn.net/g11d111/article/details/82665265" target="_blank" rel="noopener">博客</a>中对参数的含义做的进一步解释。</p>
+<ul>
+<li><p>stride(步长)：控制cross-correlation的步长，可以设为1个int型数或者一个(int, int)型的tuple。</p></li>
+<li><p>padding(补0)：控制zero-padding的数目。=0时，不填充，原图与卷积核进行卷积；=1时，在原图四边填充一行（一列），具体填充的数据由padding_mode控制，一般填0。</p></li>
+<li><p>dilation(扩张)：控制kernel点（卷积核点）的间距; 也被称为 "à trous"算法. 可以在此github地址查看:<a href="https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md" target="_blank" rel="noopener">Dilated convolution animations</a></p></li>
+<li><p>groups(卷积核个数)：这个比较好理解，通常来说，卷积个数唯一，但是对某些情况，可以设置范围在1 —— in_channels中数目的卷积核：</p>
+<blockquote>
+<p>At groups=1, all inputs are convolved to all outputs.</p>
+<p>At groups=2, the operation becomes equivalent to having two conv layers side by side, each seeing half the input channels, and producing half the output channels, and both subsequently concatenated.</p>
+<p>At groups=in_channels, each input channel is convolved with its own set of filters (of size ⌊out_channelsin_channels⌋ ).</p>
+</blockquote></li>
+</ul>
+<p>下面是<a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">官网</a>对于<code>nn.Conv2d</code>输入输出shape的说明。</p>
+<p>Shape:</p>
+<ul>
+<li><p>Input:<span class="math inline">\((N, C_{in}, H_{in}, W_{in})\)</span></p></li>
+<li><p>Output:<span class="math inline">\((N, C_{out}, H_{out}, W_{out})\)</span></p></li>
+</ul>
+<p><span class="math display">\[
+H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] - \text{dilation}[0]\times (\text{kernel_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
+\]</span></p>
+<p><span class="math display">\[
+W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] - \text{dilation}[1]\times (\text{kernel_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
+\]</span></p>
+<p>以及<a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">官网</a>中给出的样例</p>
+<blockquote>
+<p>&gt;&gt;&gt; # With square kernels and equal stride</p>
+<p>&gt;&gt;&gt; m = nn.Conv2d(16, 33, 3, stride=2)</p>
+<p>&gt;&gt;&gt; # non-square kernels and unequal stride and with padding</p>
+<p>&gt;&gt;&gt; m = nn.Conv2d(16, 33, (3, 5), stride=(2, 1), padding=(4, 2))</p>
+<p>&gt;&gt;&gt; # non-square kernels and unequal stride and with padding and dilation</p>
+<p>&gt;&gt;&gt; m = nn.Conv2d(16, 33, (3, 5), stride=(2, 1), padding=(4, 2), dilation=(3, 1))</p>
+<p>&gt;&gt;&gt; input = torch.randn(20, 16, 50, 100)</p>
+<p>&gt;&gt;&gt; output = m(input)</p>
+</blockquote>
 <h2 id="参考资料">参考资料</h2>
 <ol type="1">
-<li><a href="https://blog.csdn.net/SpadgerZ/article/details/89468756" target="_blank" rel="noopener">Win10系统安装GPU版PyTorch</a></li>
-<li><a href="https://blog.csdn.net/SpadgerZ/article/details/89454247" target="_blank" rel="noopener">Win10系统安装CUDA10.0和cuDNN</a></li>
-<li><a href="https://www.jianshu.com/p/14808d1d30d0" target="_blank" rel="noopener">conda源配置</a></li>
+<li><a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">PyTorch官网</a></li>
+<li><a href="https://blog.csdn.net/g11d111/article/details/82665265" target="_blank" rel="noopener">PyTorch学习笔记(9)——nn.Conv2d和其中的padding策略</a></li>
 </ol>
 
       
@@ -199,18 +209,6 @@
 
       <!-- copyright -->
       
-        <div class="declare">
-          <ul class="post-copyright">
-            <li>
-              <i class="ri-copyright-line"></i>
-              <strong>版权声明： </strong s>
-              欢迎转载，但请注明出处！
-              <p> 博文中可能有一些参考内容因找不到来源了没有注明，如果侵权请联系我删除。
-              </p>
-            </li>
-          </ul>
-        </div>
-        
     <footer class="article-footer">
       
       
@@ -225,19 +223,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/04/PyTorch%E7%9A%84%E4%B8%80%E4%BA%9B%E7%B1%BB%E5%8F%8A%E5%87%BD%E6%95%B0/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            PyTorch的一些类及函数
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-nav-link">
+      <a href="/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">配置hexo时遇到的问题</div>
+        <div class="article-nav-title">PyTorch-GPU环境配置</div>
       </a>
     
   </nav>
