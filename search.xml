@@ -1,116 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>PyTorch的一些类及函数</title>
-    <url>/2020/04/PyTorch%E7%9A%84%E4%B8%80%E4%BA%9B%E7%B1%BB%E5%8F%8A%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>以下是一些我在使用PyTorch中遇到的一些类及函数，为了便于理解和使用，将官网中的说明摘录一些下来。</p>
-<h2 id="torch.nn.modules.conv1d">torch.nn.modules.conv1d</h2>
-<p>来源 https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv1d</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Conv1d</span><span class="params">(_ConvNd)</span>:</span></span><br><span class="line">    <span class="string">r"""Applies a 1D convolution over an input signal composed of several input planes. """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels, out_channels, kernel_size, stride=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 padding=<span class="number">0</span>, dilation=<span class="number">1</span>, groups=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 bias=True, padding_mode=<span class="string">'zeros'</span>)</span>:</span></span><br><span class="line">        kernel_size = _single(kernel_size)</span><br><span class="line">        stride = _single(stride)</span><br><span class="line">        padding = _single(padding)</span><br><span class="line">        dilation = _single(dilation)</span><br><span class="line">        super(Conv1d, self).__init__(</span><br><span class="line">            in_channels, out_channels, kernel_size, stride, padding, dilation,</span><br><span class="line">            <span class="literal">False</span>, _single(<span class="number">0</span>), groups, bias, padding_mode)</span><br></pre></td></tr></table></figure>
-<p>类的说明：对由多个输入平面组成的输入信号应用一维卷积</p>
-<p>官网中对初始化函数中一些参数的说明：</p>
-<blockquote>
-<p>in_channels (int): Number of channels in the input image</p>
-<p>out_channels (int): Number of channels produced by the convolution</p>
-<p>kernel_size (int or tuple): Size of the convolving kernel</p>
-<p>stride (int or tuple, optional): Stride of the convolution. Default: 1</p>
-<p>padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0</p>
-<p>dilation (int or tuple, optional): Spacing between kernel elements. Default: 1</p>
-<p>groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1</p>
-<p>bias (bool, optional): If <code>True</code>, adds a learnable bias to the output. Default: <code>True</code></p>
-<p>padding_mode (string, optional). Accepted values <code>zeros</code> and <code>circular</code> Default: <code>zeros</code></p>
-</blockquote>
-<p>机翻</p>
-<blockquote>
-<p>in_channels (int): 输入图像中的通道数</p>
-<p>out_channels (int): 由卷积产生的信道数</p>
-<p>kernel_size (int or tuple): 卷积核的大小</p>
-<p>stride (int or tuple, optional): 卷积的步幅</p>
-<p>padding (int or tuple, optional): 输入的两边都加上了零填充</p>
-<p>dilation (int or tuple, optional): 卷积核元素之间的间距</p>
-<p>groups (int, optional): 从输入通道到输出通道的阻塞连接数</p>
-<p>bias (bool, optional): 如果为“ True” ，则在输出中添加可学习的偏差</p>
-<p>padding_mode (string, optional): 接受值“0”和“循环”</p>
-</blockquote>
-<h2 id="torch.nn.modules.conv2d">torch.nn.modules.conv2d</h2>
-<p>来源 https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Conv2d</span><span class="params">(_ConvNd)</span>:</span></span><br><span class="line">    <span class="string">"""Applies a 2D convolution over an input signal composed of several input planes."""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels, out_channels, kernel_size, stride=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 padding=<span class="number">0</span>, dilation=<span class="number">1</span>, groups=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 bias=True, padding_mode=<span class="string">'zeros'</span>)</span>:</span></span><br><span class="line">        kernel_size = _pair(kernel_size)</span><br><span class="line">        stride = _pair(stride)</span><br><span class="line">        padding = _pair(padding)</span><br><span class="line">        dilation = _pair(dilation)</span><br><span class="line">        super(Conv2d, self).__init__(</span><br><span class="line">            in_channels, out_channels, kernel_size, stride, padding, dilation,</span><br><span class="line">            <span class="literal">False</span>, _pair(<span class="number">0</span>), groups, bias, padding_mode)</span><br></pre></td></tr></table></figure>
-<p>类的说明：在由多个输入平面组成的输入信号上应用二维卷积。</p>
-<p>官网中对初始化函数中一些参数的说明：</p>
-<blockquote>
-<p>in_channels (int): Number of channels in the input image</p>
-<p>out_channels (int): Number of channels produced by the convolution</p>
-<p>kernel_size (int or tuple): Size of the convolving kernel</p>
-<p>stride (int or tuple, optional): Stride of the convolution. Default: 1</p>
-<p>padding (int or tuple, optional): Zero-padding added to both sides of the input. Default: 0</p>
-<p>dilation (int or tuple, optional): Spacing between kernel elements. Default: 1</p>
-<p>groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1</p>
-<p>bias (bool, optional): If <code>True</code>, adds a learnable bias to the output. Default: <code>True</code></p>
-<p>padding_mode (string, optional). Accepted values <code>zeros</code> and <code>circular</code> Default: <code>zeros</code></p>
-</blockquote>
-<p>机翻</p>
-<blockquote>
-<p>in_channels (int): 输入图像中的通道数</p>
-<p>out_channels (int): 由卷积产生的信道数</p>
-<p>kernel_size (int or tuple): 卷积核的大小</p>
-<p>stride (int or tuple, optional): 卷积的步幅</p>
-<p>padding (int or tuple, optional): 输入的两边都加上了零填充</p>
-<p>dilation (int or tuple, optional): 卷积核元素之间的间距</p>
-<p>groups (int, optional): 从输入通道到输出通道的阻塞连接数</p>
-<p>bias (bool, optional): 如果为“ True” ，则在输出中添加可学习的偏差</p>
-<p>padding_mode (string, optional): 接受值“0”和“循环”</p>
-</blockquote>
-<p>以下是<a href="https://blog.csdn.net/g11d111/article/details/82665265" target="_blank" rel="noopener">博客</a>中对参数的含义做的进一步解释。</p>
-<ul>
-<li><p>stride(步长)：控制cross-correlation的步长，可以设为1个int型数或者一个(int, int)型的tuple。</p></li>
-<li><p>padding(补0)：控制zero-padding的数目。=0时，不填充，原图与卷积核进行卷积；=1时，在原图四边填充一行（一列），具体填充的数据由padding_mode控制，一般填0。</p></li>
-<li><p>dilation(扩张)：控制kernel点（卷积核点）的间距; 也被称为 "à trous"算法. 可以在此github地址查看:<a href="https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md" target="_blank" rel="noopener">Dilated convolution animations</a></p></li>
-<li><p>groups(卷积核个数)：这个比较好理解，通常来说，卷积个数唯一，但是对某些情况，可以设置范围在1 —— in_channels中数目的卷积核：</p>
-<blockquote>
-<p>At groups=1, all inputs are convolved to all outputs.</p>
-<p>At groups=2, the operation becomes equivalent to having two conv layers side by side, each seeing half the input channels, and producing half the output channels, and both subsequently concatenated.</p>
-<p>At groups=in_channels, each input channel is convolved with its own set of filters (of size ⌊out_channelsin_channels⌋ ).</p>
-</blockquote></li>
-</ul>
-<p>下面是<a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">官网</a>对于<code>nn.Conv2d</code>输入输出shape的说明。</p>
-<p><img src="/2020/04/PyTorch%E7%9A%84%E4%B8%80%E4%BA%9B%E7%B1%BB%E5%8F%8A%E5%87%BD%E6%95%B0/image-20200403105140170.png"></p>
-<!-- 上图源markdown代码如下，为使页面更加流畅，使用图片
-Shape:
-
-- Input:$(N, C_{in}, H_{in}, W_{in})$
-
-- Output:$(N, C_{out}, H_{out}, W_{out})$
-
-$$
-H_{out} = \left\lfloor\frac{H_{in}  + 2 \times \text{padding}[0] - \text{dilation}[0]\times (\text{kernel_size}[0] - 1) - 1}{\text{stride}[0]} + 1\right\rfloor
-$$
-
-$$
-W_{out} = \left\lfloor\frac{W_{in}  + 2 \times \text{padding}[1] - \text{dilation}[1]\times (\text{kernel_size}[1] - 1) - 1}{\text{stride}[1]} + 1\right\rfloor
-$$
--->
-<p>以及<a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">官网</a>中给出的样例</p>
-<blockquote>
-<p>&gt;&gt;&gt; # With square kernels and equal stride</p>
-<p>&gt;&gt;&gt; m = nn.Conv2d(16, 33, 3, stride=2)</p>
-<p>&gt;&gt;&gt; # non-square kernels and unequal stride and with padding</p>
-<p>&gt;&gt;&gt; m = nn.Conv2d(16, 33, (3, 5), stride=(2, 1), padding=(4, 2))</p>
-<p>&gt;&gt;&gt; # non-square kernels and unequal stride and with padding and dilation</p>
-<p>&gt;&gt;&gt; m = nn.Conv2d(16, 33, (3, 5), stride=(2, 1), padding=(4, 2), dilation=(3, 1))</p>
-<p>&gt;&gt;&gt; input = torch.randn(20, 16, 50, 100)</p>
-<p>&gt;&gt;&gt; output = m(input)</p>
-</blockquote>
-<h2 id="参考资料">参考资料</h2>
-<ol type="1">
-<li><a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html#Conv2d" target="_blank" rel="noopener">PyTorch官网</a></li>
-<li><a href="https://blog.csdn.net/g11d111/article/details/82665265" target="_blank" rel="noopener">PyTorch学习笔记(9)——nn.Conv2d和其中的padding策略</a></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>PyTorch</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PyTorch-GPU环境配置</title>
     <url>/2020/03/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这篇博客就是为了记录下我自己配置PyTorch-GPU的过程。</p>
@@ -208,7 +98,7 @@ $$
         <category>环境配置</category>
       </categories>
       <tags>
-        <tag>PyTorch</tag>
+        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
