@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN" >
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+    
+  <meta name="description" content="今天早上没喝水" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    PyTorch-GPU环境配置 |  Diralpo的个人博客
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+  <script type="text/javascript" src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="/js/clipboard-use.js"></script>
+<link rel="alternate" href="/atom.xml" title="Diralpo的个人博客" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+</html>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-pytorch-gpu环境配置" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  PyTorch-GPU环境配置
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2020-04-12T00:46:11.000Z" itemprop="datePublished">2020-04-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计 :</span>
+            <span class="post-count">1k</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>这篇博客就是为了记录下我自己配置PyTorch-GPU的过程。</p>
+<p>因为我之前换过一次电脑，导致我这里还要再重新配置一下PyTorch。然而我之前配置的时候又没有做好记录，这次配置又要百度各种教程。😂吸取之前的教训，我现在要记录下我自己的配置过程，省的之后再安装还要百度了23333333</p>
+<h2 id="创建conda虚拟环境">创建conda虚拟环境</h2>
+<p>我通过如下命令创建了虚拟环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pygpu pip python&#x3D;3.7</span><br></pre></td></tr></table></figure>
+<p>在这里我发现我老是无法创建成功，我感觉可能就是源的原因吧。于是我参考 <a href="https://www.jianshu.com/p/14808d1d30d0" target="_blank" rel="noopener">conda源配置</a> 这篇博客，使用如下命令配置中科大源，解决了问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;conda-forge&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;msys2&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;bioconda&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;anaconda&#x2F;cloud&#x2F;menpo&#x2F;</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<h2 id="配置cuda环境">配置CUDA环境</h2>
+<p>因为我这台电脑之前已经安装过CUDA了，这次就只检查一下是否配置成功了。而关于如何安装CUDA，可以参考 <a href="https://blog.csdn.net/SpadgerZ/article/details/89454247" target="_blank" rel="noopener">Win10系统安装CUDA10.0和cuDNN</a> 这篇博客。</p>
+<h3 id="命令行测试">命令行测试</h3>
+<p>打开cmd命令行窗口，通过如下命令检查cuda是否安装：</p>
+<p>通过如下命令检查cuda是否安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure>
+<p>输出了</p>
+<blockquote>
+<p>nvcc: NVIDIA (R) Cuda compiler driver</p>
+<p>Copyright (c) 2005-2019 NVIDIA Corporation</p>
+<p>Built on Fri_Feb__8_19:08:26_Pacific_Standard_Time_2019</p>
+<p>Cuda compilation tools, release 10.1, V10.1.105</p>
+</blockquote>
+<p>这表明我已经安装好了cuda10.1的版本。</p>
+<h3 id="编译测试文件">编译测试文件</h3>
+<p>打开<code>C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1</code>路径下的<code>Samples_vs2017.sln</code></p>
+<p>在“解决方案资源管理器”中找到1_Utilities，右键点击“生成”</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122527805.png"></p>
+<p>这时VS2017在编译过程中产生“找不到Windows SDK版本”的错误：</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20190422171732910.png"></p>
+<p>解决方法：在解决方案中右键选择“重定解决方案目标”</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122645545.png"></p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122711378.png"></p>
+<p>点击确定即可通过编译。</p>
+<h3 id="验证devicequery.exe和bandwidthtest.exe">验证deviceQuery.exe和bandwidthTest.exe</h3>
+<p>cmd窗口进入如下路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1\bin\win64\Release</span><br></pre></td></tr></table></figure>
+<p>分别输入<code>deviceQuery</code>，<code>bandwidthTest</code>并运行，<code>Result = PASS</code>则说明通过，反之，<code>Result = Fail</code> 则需要重新安装。</p>
+<figure>
+<img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122958469.png" alt><figcaption>deviceQuery结果</figcaption>
+</figure>
+<figure>
+<img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329123021915.png" alt><figcaption>bandwidthTest结果</figcaption>
+</figure>
+<h3 id="配置cuda环境变量">配置CUDA环境变量</h3>
+<ol type="1">
+<li>确认系统环境变量中：CUDA_PATH和CUDA_PATH_V10.0已经存在</li>
+<li>添加：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CUDA_SDK_PATH &#x3D; C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1</span><br><span class="line">CUDA_LIB_PATH &#x3D; %CUDA_PATH%\lib\x64</span><br><span class="line">CUDA_BIN_PATH &#x3D; %CUDA_PATH%\bin</span><br><span class="line">CUDA_SDK_BIN_PATH &#x3D; %CUDA_SDK_PATH%\bin\win64</span><br><span class="line">CUDA_SDK_LIB_PATH &#x3D; %CUDA_SDK_PATH%\common\lib\x64</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li><p>在cmd窗口查看环境变量配置情况，输入<code>set cuda</code>，输出如下：</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329123457521.png"></p></li>
+</ol>
+<h2 id="安装cudnn">安装cuDNN</h2>
+<p>打开 <a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN网页</a></p>
+<p>注意在下载之前需要完成开发者注册（就是注册一个账号）</p>
+<p>选择与CUDA匹配的cuDNN版本进行下载</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122249578.png"></p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329122342790.png"></p>
+<p>下载之后是个压缩包文件，解压缩：</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329123638244.png"></p>
+<p>将<code>CUDA\bin</code>、<code>CUDA\include</code>、<code>CUDA\lib</code>中的内容拷贝到相应的<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1</code>文件路径下即可。</p>
+<p>这里我参照 <a href="https://blog.csdn.net/SpadgerZ/article/details/89454247" target="_blank" rel="noopener">Win10系统安装CUDA10.0和cuDNN</a> 这篇博客中加入了系统环境变量如下：</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329124109696.png"></p>
+<h2 id="安装pytorch">安装pytorch</h2>
+<p>在 <a href="https://pytorch.org/get-started/locally/" target="_blank" rel="noopener">Pytorch官网</a> 中找到安装的命令。</p>
+<p><img src="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20200329111946759.png"></p>
+<p>我这里是直接使用pip安装的。</p>
+<p>使用如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch&#x3D;&#x3D;&#x3D;1.4.0 torchvision&#x3D;&#x3D;&#x3D;0.5.0 -f https:&#x2F;&#x2F;download.pytorch.org&#x2F;whl&#x2F;torch_stable.html</span><br></pre></td></tr></table></figure>
+<h2 id="验证是否安装成功">验证是否安装成功</h2>
+<p>为了确保PyTorch安装成功，我们需要运行简单的样例代码测试，例如打印出随机生成的张量矩阵，以及gpu是否可以使用。</p>
+<p>首先在命令行输入python，进入python的解释器，输入以下语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.rand(<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<blockquote>
+<p>tensor([[0.9943, 0.2830, 0.5508],</p>
+<p>​ [0.0765, 0.6474, 0.0059],</p>
+<p>​ [0.7241, 0.1868, 0.5398],</p>
+<p>​ [0.3217, 0.4664, 0.4242],</p>
+<p>​ [0.3351, 0.2482, 0.7371]])</p>
+</blockquote>
+<p>说明PyTorch安装成功。</p>
+<p>接下来再输入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.cuda.is_available()</span><br></pre></td></tr></table></figure>
+<p>输出为<code>True</code>即证明支持GPU了。</p>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li><a href="https://blog.csdn.net/SpadgerZ/article/details/89468756" target="_blank" rel="noopener">Win10系统安装GPU版PyTorch</a></li>
+<li><a href="https://blog.csdn.net/SpadgerZ/article/details/89454247" target="_blank" rel="noopener">Win10系统安装CUDA10.0和cuDNN</a></li>
+<li><a href="https://www.jianshu.com/p/14808d1d30d0" target="_blank" rel="noopener">conda源配置</a></li>
+</ol>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+
+      <!-- copyright -->
+      
+        <br/><p style="font-weight:  bold;font-size: 100%;text-align:  center;color: #ddd;text-indent: 0;">___END___</p>
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+                <i class="ri-copyright-line"></i>
+                <strong>版权声明： </strong s>欢迎转载，但请注明出处！<br/>
+                <div style="margin-left:1em">
+                博文中可能有一些参考内容因找不到来源了没有注明，如果侵权请联系我删除。<br/>
+                欢迎留下您的意见、建议和 <strong>批评</strong> ！
+                </div>
+            </li>
+          </ul>
+        </div>
+        
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">配置hexo时遇到的问题</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'QRohHOkH100zAybox8N5fdY7-gzGzoHsz',
+        app_key: 'W48WLYHARHEuUMwOpRWxkIpS',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        Diralpo
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278698995&amp;web_id=1278698995'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Diralpo的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2020/02/About/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['天阔云闲，树缈禽幽', '雁引愁心去，山衔好月来', '江畔何人初见月？江月何年初照人？'],
+      startDelay: 0,
+      typeSpeed: 160,
+      loop: true,
+      backSpeed: 80,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+    
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+
+</html>
