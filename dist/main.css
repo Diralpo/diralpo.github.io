@@ -6,5 +6,5 @@
 .article-entry span.math.inline.has-jax{margin:0 .3rem}.article-entry dl,.article-entry ol,.article-entry ul{margin:1.5rem 0 1.5rem 0.2rem}.article-entry ul{margin-left: 3rem}.article-entry .highlight, .article-entry pre {position: relative}.article-entry hr{height:.2rem;background-color:#999;border:none;padding:0;margin:1.5rem 0}.article-entry strong{color: #1E90FF}
 #app div.cover-inner h1 a,#app div#subtitle-box span{color:white;text-shadow:2px 2px 2px #1e90ff,-2px -2px 2px #1e90ff,2px -2px 2px #1e90ff,-2px 2px 2px #1e90ff,
 2px 0 2px #1e90ff,-2px 0 2px #1e90ff,0 -2px 2px #1e90ff,0 2px 2px #1e90ff}
-#app>main>section>div.cover-frame>div.bg-box>img{opacity:.9}#app>main>section>div.cover-frame>div.bg-box{background-color:black}
+#app>main>section>div.cover-frame>div.bg-box>img{opacity:1}#app>main>section>div.cover-frame>div.bg-box{background-color:black}
 /*# sourceMappingURL=/main.css.map */
