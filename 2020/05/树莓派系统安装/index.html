@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     Diralpo的个人博客
+    树莓派系统安装 |  Diralpo的个人博客
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -41,57 +41,17 @@
 <body>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content on">
-      
-<section class="cover">
-    
-      
-      <a class="forkMe" href="https://github.com/Diralpo"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="/images/cover.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/">Diralpo的个人博客</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
-
-<div id="main">
-  <section class="outer">
-  <article class="articles">
-    
-    
-    
-    
-    <article id="post-树莓派系统安装" class="article article-type-post" itemscope
+      <section class="outer">
+  <article id="post-树莓派系统安装" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"
-    >树莓派系统安装</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  树莓派系统安装
+</h1>
  
 
     </header>
@@ -109,17 +69,124 @@
 
       
       
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计 :</span>
+            <span class="post-count">865</span>
+        </span>
+    </span>
+</div>
+
       
     </div>
     
 
     
+    
+    <div class="tocbot"></div>
+
+
+
+
 
     
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="写入系统镜像">写入系统镜像</h2>
+<p>这里我使用的是<code>raspbian</code>系统，可以从<strong>下方</strong>链接中下载。</p>
+<blockquote>
+<p>Raspbian</p>
+<p>树莓派官方深度定制的硬件驱动与软件程序，官方推荐系统。如果你第一次使用树莓派，请下载这个。Debian的软件策略偏保守，稳定第一，升级是次要的。</p>
+<p>桌面版下载链接：<a href="http://downloads.raspberrypi.org/raspbian_latest" target="_blank" rel="noopener">http://downloads.raspberrypi.org/raspbian_latest</a></p>
+<p>Lite 版（无桌面）下载链接：<a href="https://downloads.raspberrypi.org/raspbian_lite_latest" target="_blank" rel="noopener">https://downloads.raspberrypi.org/raspbian_lite_latest</a></p>
+<p>默认帐号：Username: pi Password: raspberry</p>
+<p>—— 来自<a href="https://shumeipai.nxez.com/download" target="_blank" rel="noopener">资源下载 | 树莓派实验室</a></p>
+</blockquote>
+<p>将SD卡格式化，安装<code>win32diskimager</code>，将raspbian的系统镜像写入SD卡中。win32diskimager可以在下方链接中下载。</p>
+<blockquote>
+<p>4.镜像烧录工具</p>
+<p><a href="http://sourceforge.net/projects/win32diskimager/files/Archive/win32diskimager-v0.9-binary.zip/download" target="_blank" rel="noopener">Win32DiskImager v0.9.zip</a> (<a href="http://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">sourceforge.net</a>)</p>
+<p>—— 来自<a href="https://shumeipai.nxez.com/download" target="_blank" rel="noopener">资源下载 | 树莓派实验室</a></p>
+</blockquote>
+<ol type="1">
+<li>解压下载的操作系统镜像压缩文件，得到 img 镜像文件（文件名后缀就是 img）。</li>
+<li>将SD使用卡托或者读卡器后，连上电脑。</li>
+<li>解压并运行 win32diskimager 工具。</li>
+<li>在 win32diskimager 软件中选择系统镜像（img文件），“设备”下选择SD的盘符，然后选择“写入”。</li>
+</ol>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200430180851685.png" alt><figcaption>win32diskimager软件界面</figcaption>
+</figure>
+<h2 id="初始设置">初始设置</h2>
+<h3 id="没有显示器连接树莓派">没有显示器连接树莓派</h3>
+<p>无需为树莓派单独购买显示屏、键鼠等配件，可以直接通过ssh访问树莓派。当然如果你有相关的配件，你也可以自行了解如何去使用。</p>
+<p>在SD卡根目录创建文件<code>wpa_supplicant.conf</code>（这里我的wifi使用WPA/WPA2加密的）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctrl_interface&#x3D;DIR&#x3D;&#x2F;var&#x2F;run&#x2F;wpa_supplicant GROUP&#x3D;netdev</span><br><span class="line">network&#x3D;&#123;</span><br><span class="line">  ssid&#x3D;&quot;你的WIFI名&quot;</span><br><span class="line">  key_mgmt&#x3D;WPA-PSK</span><br><span class="line">  psk&#x3D;&quot;WIFI密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>文件具体内容可以参考如下内容。</p>
+<blockquote>
+<p>如果你的 WiFi 没有密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">network&#x3D;&#123;</span><br><span class="line">ssid&#x3D;&quot;你的无线网络名称（ssid）&quot;</span><br><span class="line">key_mgmt&#x3D;NONE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你的 WiFi 使用WEP加密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">network&#x3D;&#123;</span><br><span class="line">ssid&#x3D;&quot;你的无线网络名称（ssid）&quot;</span><br><span class="line">key_mgmt&#x3D;NONE</span><br><span class="line">wep_key0&#x3D;&quot;你的wifi密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你的 WiFi 使用WPA/WPA2加密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">network&#x3D;&#123;</span><br><span class="line">ssid&#x3D;&quot;你的无线网络名称（ssid）&quot;</span><br><span class="line">key_mgmt&#x3D;WPA-PSK</span><br><span class="line">psk&#x3D;&quot;你的wifi密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你不清楚 WiFi 的加密模式，可以在安卓手机上用 root explorer 打开 <code>/data/misc/wifi/wpa/wpa_supplicant.conf</code>，查看 WiFi 的信息。</p>
+<p>—— 来自<a href="https://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html" target="_blank" rel="noopener">无屏幕和键盘配置树莓派WiFi和SSH</a></p>
+</blockquote>
+<p>再在SD卡根目录新建文件<code>ssh</code>（无后缀）。</p>
+<h2 id="启动树莓派">启动树莓派</h2>
+<p>将SD卡插入树莓派，接通电源。之后通过<code>ping raspberrypi.local</code>命令获取树莓派的内网IP，可惜我这样无法获取。我是进入路由器的管理界面直接查看树莓派的内网IP的。</p>
+<p>通过ssh连接树莓派，链接的方式可以使用<code>PuTTY</code>，也可以使用<code>MobaXterm</code>等。我使用的是MobaXterm，个人感觉这个软件比较方便好用。</p>
+<p>MobaXterm可以去<a href="https://mobaxterm.mobatek.net/download.html" target="_blank" rel="noopener">https://mobaxterm.mobatek.net/download.html</a>下载，安装方式也十分简单。</p>
+<p>安装完成后启动MobaXterm，点击Session图标。</p>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200505111058965.png" alt><figcaption>Session图标</figcaption>
+</figure>
+<p>如下图，填入树莓派的局域网IP和默认用户名<code>pi</code>，点击OK。之后还会要求你填入用户密码。Raspbian系统的默认用户名和密码是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户名：pi</span><br><span class="line">密码：raspberry</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200505111742655.png" alt><figcaption>Session settings界面</figcaption>
+</figure>
+<p>然后就可以愉快的玩耍了。</p>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200430181650176.png" alt><figcaption>连接成功</figcaption>
+</figure>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li><a href="https://blog.csdn.net/itguangzhi/article/details/91044063" target="_blank" rel="noopener">树莓派魔镜——树莓派无显示器安装系统并连接vnc</a></li>
+<li><a href="https://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html" target="_blank" rel="noopener">无屏幕和键盘配置树莓派WiFi和SSH | 树莓派实验室</a></li>
+<li><a href="https://shumeipai.nxez.com/download" target="_blank" rel="noopener">资源下载 | 树莓派实验室</a></li>
+</ol>
+
+      
+      <!-- reward -->
+      
+    </div>
     
 
       <!-- copyright -->
       
+        <br/><p style="font-weight:  bold;font-size: 100%;text-align:  center;color: #ddd;text-indent: 0;">___END___</p>
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+                <i class="ri-copyright-line"></i>
+                <strong>版权声明： </strong s>欢迎转载，但请注明出处！<br/>
+                <div style="margin-left:1em">
+                博文中可能有一些参考内容因找不到来源了没有注明，如果侵权请联系我删除。<br/>
+                欢迎留下您的意见、建议和 <strong>批评</strong> ！
+                </div>
+            </li>
+          </ul>
+        </div>
+        
       
     <footer class="article-footer">
       
@@ -132,254 +199,80 @@
   </div>
 
   
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">PyTorch-GPU环境配置</div>
+      </a>
+    
+  </nav>
+
+
+  
 
   
   
-  
-
-  
-
-</article>
-    
-    <article id="post-pytorch-gpu环境配置" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
-    >PyTorch-GPU环境配置</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time datetime="2020-04-12T00:46:11.000Z" itemprop="datePublished">2020-04-12</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
-  </div>
-
-      
-      
-      
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
     </div>
-    
-
-    
-
-    
-    
-
-      <!-- copyright -->
-      
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-配置hexo时遇到的问题" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"
-    >配置hexo时遇到的问题</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/03/%E9%85%8D%E7%BD%AEhexo%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
-  <time datetime="2020-03-21T04:47:59.000Z" itemprop="datePublished">2020-03-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/">博客部署</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    
-
-      <!-- copyright -->
-      
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-css实现标题自动编号" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/03/css%E5%AE%9E%E7%8E%B0%E6%A0%87%E9%A2%98%E8%87%AA%E5%8A%A8%E7%BC%96%E5%8F%B7/"
-    >css实现标题自动编号</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/03/css%E5%AE%9E%E7%8E%B0%E6%A0%87%E9%A2%98%E8%87%AA%E5%8A%A8%E7%BC%96%E5%8F%B7/" class="article-date">
-  <time datetime="2020-03-19T07:38:29.000Z" itemprop="datePublished">2020-03-19</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/">前端学习</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    
-
-      <!-- copyright -->
-      
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-About" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/About/"
-    >About</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/About/" class="article-date">
-  <time datetime="2020-02-19T04:31:18.000Z" itemprop="datePublished">2020-02-19</time>
-</a>
-      
-      
-    </div>
-    
-
-    
-
-    
-    
-
-      <!-- copyright -->
-      
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-  </article>
-  
-
-  
-</section>
 </div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'QRohHOkH100zAybox8N5fdY7-gzGzoHsz',
+        app_key: 'W48WLYHARHEuUMwOpRWxkIpS',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
 
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
       <footer class="footer">
   <div class="outer">
     <ul class="list-inline">
@@ -523,6 +416,24 @@
 </script>
 
 
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 
 

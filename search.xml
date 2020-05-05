@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>树莓派系统安装</title>
+    <url>/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="写入系统镜像">写入系统镜像</h2>
+<p>这里我使用的是<code>raspbian</code>系统，可以从<strong>下方</strong>链接中下载。</p>
+<blockquote>
+<p>Raspbian</p>
+<p>树莓派官方深度定制的硬件驱动与软件程序，官方推荐系统。如果你第一次使用树莓派，请下载这个。Debian的软件策略偏保守，稳定第一，升级是次要的。</p>
+<p>桌面版下载链接：<a href="http://downloads.raspberrypi.org/raspbian_latest" target="_blank" rel="noopener">http://downloads.raspberrypi.org/raspbian_latest</a></p>
+<p>Lite 版（无桌面）下载链接：<a href="https://downloads.raspberrypi.org/raspbian_lite_latest" target="_blank" rel="noopener">https://downloads.raspberrypi.org/raspbian_lite_latest</a></p>
+<p>默认帐号：Username: pi Password: raspberry</p>
+<p>—— 来自<a href="https://shumeipai.nxez.com/download" target="_blank" rel="noopener">资源下载 | 树莓派实验室</a></p>
+</blockquote>
+<p>将SD卡格式化，安装<code>win32diskimager</code>，将raspbian的系统镜像写入SD卡中。win32diskimager可以在下方链接中下载。</p>
+<blockquote>
+<p>4.镜像烧录工具</p>
+<p><a href="http://sourceforge.net/projects/win32diskimager/files/Archive/win32diskimager-v0.9-binary.zip/download" target="_blank" rel="noopener">Win32DiskImager v0.9.zip</a> (<a href="http://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">sourceforge.net</a>)</p>
+<p>—— 来自<a href="https://shumeipai.nxez.com/download" target="_blank" rel="noopener">资源下载 | 树莓派实验室</a></p>
+</blockquote>
+<ol type="1">
+<li>解压下载的操作系统镜像压缩文件，得到 img 镜像文件（文件名后缀就是 img）。</li>
+<li>将SD使用卡托或者读卡器后，连上电脑。</li>
+<li>解压并运行 win32diskimager 工具。</li>
+<li>在 win32diskimager 软件中选择系统镜像（img文件），“设备”下选择SD的盘符，然后选择“写入”。</li>
+</ol>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200430180851685.png" alt><figcaption>win32diskimager软件界面</figcaption>
+</figure>
+<h2 id="初始设置">初始设置</h2>
+<h3 id="没有显示器连接树莓派">没有显示器连接树莓派</h3>
+<p>无需为树莓派单独购买显示屏、键鼠等配件，可以直接通过ssh访问树莓派。当然如果你有相关的配件，你也可以自行了解如何去使用。</p>
+<p>在SD卡根目录创建文件<code>wpa_supplicant.conf</code>（这里我的wifi使用WPA/WPA2加密的）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ctrl_interface&#x3D;DIR&#x3D;&#x2F;var&#x2F;run&#x2F;wpa_supplicant GROUP&#x3D;netdev</span><br><span class="line">network&#x3D;&#123;</span><br><span class="line">  ssid&#x3D;&quot;你的WIFI名&quot;</span><br><span class="line">  key_mgmt&#x3D;WPA-PSK</span><br><span class="line">  psk&#x3D;&quot;WIFI密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>文件具体内容可以参考如下内容。</p>
+<blockquote>
+<p>如果你的 WiFi 没有密码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">network&#x3D;&#123;</span><br><span class="line">ssid&#x3D;&quot;你的无线网络名称（ssid）&quot;</span><br><span class="line">key_mgmt&#x3D;NONE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你的 WiFi 使用WEP加密</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">network&#x3D;&#123;</span><br><span class="line">ssid&#x3D;&quot;你的无线网络名称（ssid）&quot;</span><br><span class="line">key_mgmt&#x3D;NONE</span><br><span class="line">wep_key0&#x3D;&quot;你的wifi密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你的 WiFi 使用WPA/WPA2加密</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">network&#x3D;&#123;</span><br><span class="line">ssid&#x3D;&quot;你的无线网络名称（ssid）&quot;</span><br><span class="line">key_mgmt&#x3D;WPA-PSK</span><br><span class="line">psk&#x3D;&quot;你的wifi密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你不清楚 WiFi 的加密模式，可以在安卓手机上用 root explorer 打开 <code>/data/misc/wifi/wpa/wpa_supplicant.conf</code>，查看 WiFi 的信息。</p>
+<p>—— 来自<a href="https://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html" target="_blank" rel="noopener">无屏幕和键盘配置树莓派WiFi和SSH</a></p>
+</blockquote>
+<p>再在SD卡根目录新建文件<code>ssh</code>（无后缀）。</p>
+<h2 id="启动树莓派">启动树莓派</h2>
+<p>将SD卡插入树莓派，接通电源。之后通过<code>ping raspberrypi.local</code>命令获取树莓派的内网IP，可惜我这样无法获取。我是进入路由器的管理界面直接查看树莓派的内网IP的。</p>
+<p>通过ssh连接树莓派，链接的方式可以使用<code>PuTTY</code>，也可以使用<code>MobaXterm</code>等。我使用的是MobaXterm，个人感觉这个软件比较方便好用。</p>
+<p>MobaXterm可以去<a href="https://mobaxterm.mobatek.net/download.html" target="_blank" rel="noopener">https://mobaxterm.mobatek.net/download.html</a>下载，安装方式也十分简单。</p>
+<p>安装完成后启动MobaXterm，点击Session图标。</p>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200505111058965.png" alt><figcaption>Session图标</figcaption>
+</figure>
+<p>如下图，填入树莓派的局域网IP和默认用户名<code>pi</code>，点击OK。之后还会要求你填入用户密码。Raspbian系统的默认用户名和密码是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用户名：pi</span><br><span class="line">密码：raspberry</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200505111742655.png" alt><figcaption>Session settings界面</figcaption>
+</figure>
+<p>然后就可以愉快的玩耍了。</p>
+<figure>
+<img src="/2020/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/image-20200430181650176.png" alt><figcaption>连接成功</figcaption>
+</figure>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li><a href="https://blog.csdn.net/itguangzhi/article/details/91044063" target="_blank" rel="noopener">树莓派魔镜——树莓派无显示器安装系统并连接vnc</a></li>
+<li><a href="https://shumeipai.nxez.com/2017/09/13/raspberry-pi-network-configuration-before-boot.html" target="_blank" rel="noopener">无屏幕和键盘配置树莓派WiFi和SSH | 树莓派实验室</a></li>
+<li><a href="https://shumeipai.nxez.com/download" target="_blank" rel="noopener">资源下载 | 树莓派实验室</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>搞机</category>
+      </categories>
+      <tags>
+        <tag>树莓派</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PyTorch-GPU环境配置</title>
     <url>/2020/04/pytorch-gpu%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这篇博客就是为了记录下我自己配置PyTorch-GPU的过程。</p>
