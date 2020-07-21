@@ -1,6 +1,6 @@
 <html>
     <head>
-        <meta content="width=device-width,initial-scale=1,minimum-scale=1" name="viewport" charset=utf-8">
+        <meta content="width=device-width,initial-scale=1,minimum-scale=1" name="viewport" charset="utf-8">
             <title>
                 vue-RGB颜色值与十六进制颜色码转换工具
             </title>
@@ -14,10 +14,6 @@
 #color tr td:nth-of-type(2),#color tr td:nth-of-type(3){display:none;}
 }
                 </style>
-                <script>
-                    function showRGB(){hexcode="#";for(x=0;x<3;x++){;var n=document.getElementsByName("r1e")[x].value;if(n=="")n="0";if(parseInt(n)!=n)return alert("请输入数字！");if(n>255)return alert("数字在0-255之间！");var c="0123456789ABCDEF", b="", a=n%16;b=c.substr(a,1);a=(n-a)/16;hexcode+=c.substr(a,1)+b}document.getElementById("color1").bgColor=a_mo2.innerHTML=hexcode}
-function getkey(e,n){var keynum;if(window.event)keynum=e.keyCode;else if(e.which)keynum=e.which;if(keynum==13){if(n==0)showRGB();else showRGB2();}}
-                </script>
             </link>
         </meta>
     </head>
